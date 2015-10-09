@@ -12,6 +12,5 @@
 vignettes/*.html
 vignettes/*.pdf
 
-examples/
 notes.Rmd
 .Rproj.user

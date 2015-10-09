@@ -1,0 +1,18 @@
+Package: reso
+Type: Package
+Title: Implementation of the RESO Graph Decomposition Algorithm
+Version: 0.1.0
+Date: 2015-10-09
+Authors@R: c(person("Julien", "Barnier", email="julien.barnier@ens-lyon.fr",
+    role=c("aut","cre")), person("Monique", "Vincent-Dalud", email="monique.vincent-dalud@univ-lyon2.fr",
+    role=c("aut")))
+Maintainer: Julien Barnier <julien.barnier@ens-lyon.fr>
+URL: https://github.com/juba/reso
+Description: R implementation of the RESO graph decomposition algorithm by
+    Monique Vincent-Dalud.
+License: GPL (>= 2)
+LazyData: TRUE
+Imports:
+    igraph
+RoxygenNote: 4.1.1.9000
+Encoding: UTF-8

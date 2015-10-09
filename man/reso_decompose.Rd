@@ -4,7 +4,7 @@
 \alias{reso_decompose}
 \title{RESO algorithm decomposition iteration}
 \usage{
-reso_decompose(g, iter, ap1, ap)
+reso_decompose(g, iter, ap1, ap, type)
 }
 \arguments{
 \item{g}{an igraph graph}

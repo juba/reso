@@ -4,10 +4,12 @@
 \alias{reso}
 \title{Apply the RESO algorithm to a graph}
 \usage{
-reso(g)
+reso(g, type = "weak")
 }
 \arguments{
 \item{g}{an igraph graph}
+
+\item{type}{connectedness type for directed graphs : "weak" or "strong". Ignored for undirected graphs}
 }
 \value{
 Character vector with each vertex group. Groups are given in the form XX_YY,
@@ -24,7 +26,7 @@ See the reference article for details and explanations about the algorithm.
 }
 \examples{
 ## Random graph
-g <- igraph::sample_gnp(26, 0.15)
+g <- igraph::sample_gnp(14, 0.35)
 plot(g)
 res <- reso(g)
 plot_reso(g, res)

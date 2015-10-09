@@ -1,6 +1,7 @@
 #' Apply the RESO algorithm to a graph
 #'
 #' @param g an igraph graph
+#' @param type connectedness type for directed graphs : "weak" or "strong". Ignored for undirected graphs
 #'
 #' @details
 #' See the reference article for details and explanations about the algorithm.
@@ -25,19 +26,25 @@
 #' res <- reso(g)
 #' plot_reso(g, res)
 #'
-reso <- function(g) {
+
+reso <- function(g, type = "weak") {
+
   ## Add temporay names if needed
   if (is.null(names(g))) {
     V(g)$name <- as.character(V(g))
   }
+
   ## Run algorithm
-  groups <- reso_decompose(g, 0, NULL, NULL)
+  groups <- reso_decompose(g, 0, NULL, NULL, type)
+
   ## Generate group variable
   group <- rep(NA, length(V(g)))
   for (n in names(groups)) {
     group[V(g)$name %in% groups[[n]]] <- n
   }
+
   group
+
 }
 
 
@@ -50,15 +57,15 @@ reso <- function(g) {
 #' @param ap1 list of previous non clustered 1-AP
 #' @param ap list of previous non clustered ap
 #'
-#'
-reso_decompose <- function(g, iter, ap1, ap) {
+
+reso_decompose <- function(g, iter, ap1, ap, type) {
 
   groups <- list()
   ## Iteration, for group naming
   iter <- iter + 1
 
   ## split the graph into CC
-  comp <- igraph::components(g)
+  comp <- igraph::components(g, mode = type)
   ## Create a group with all the CC singletons
   cc_sing_id <- which(comp$csize == 1)
   if (length(cc_sing_id) > 0) {
@@ -111,7 +118,7 @@ reso_decompose <- function(g, iter, ap1, ap) {
 
     ## Apply the algortihm to the graph without the previously clustered vertices
     subcc <- cc - .group
-    if (length(V(subcc)) > 0) groups <- c(groups, reso_decompose(subcc, iter, ap1, ap))
+    if (length(V(subcc)) > 0) groups <- c(groups, reso_decompose(subcc, iter, ap1, ap, type))
 
   }
 

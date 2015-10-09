@@ -7,6 +7,7 @@
 #' points (1-AP) and weak points of a graph.
 #'
 #' @param g a connected igraph graph
+#' @param type connectedness type for directed graphs : "weak" or "strong". Ignored for undirected graphs
 #'
 #' @details
 #' Articulation points are determined with the \code{\link[igraph]{articulation_points}} function.
@@ -31,9 +32,9 @@
 #' @importFrom igraph V
 
 
-ap_wp <- function(g) {
+ap_wp <- function(g, type = "weak") {
 
-  if (!igraph::is_connected(g)) stop("g must be connected")
+  if (!igraph::is_connected(g, mode = type)) stop("g must be connected")
 
   # initialization
   ap <- igraph::articulation_points(g)$name
@@ -44,7 +45,7 @@ ap_wp <- function(g) {
     v <- V(g)[vname]
     .tmpg <- igraph::delete_vertices(g, v)
     ## Compute CC without this AP
-    .tmpc <- igraph::components(.tmpg)
+    .tmpc <- igraph::components(.tmpg, mode = type)
     ## If one of the CC is a singleton
     if (1 %in% .tmpc$csize) {
       ## v is ap_1

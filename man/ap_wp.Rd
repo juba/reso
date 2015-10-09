@@ -4,10 +4,12 @@
 \alias{ap_wp}
 \title{Find Articulation points and weak point of a graph}
 \usage{
-ap_wp(g)
+ap_wp(g, type = "weak")
 }
 \arguments{
 \item{g}{a connected igraph graph}
+
+\item{type}{connectedness type for directed graphs : "weak" or "strong". Ignored for undirected graphs}
 }
 \value{
 A list with 3 elements :

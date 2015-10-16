@@ -12,7 +12,8 @@ Description: R implementation of the RESO graph decomposition algorithm by
     Monique Vincent-Dalud.
 License: GPL (>= 2)
 LazyData: TRUE
-Imports:
+Imports: 
     igraph
 RoxygenNote: 4.1.1.9000
 Encoding: UTF-8
+Suggests: testthat

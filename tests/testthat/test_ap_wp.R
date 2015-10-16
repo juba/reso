@@ -1,5 +1,5 @@
 library(reso)
-library(igraph)
+
 context("AP, 1-AP and WP tests")
 
 ## DATA -----------------------------------------------------------
@@ -26,3 +26,11 @@ test_that("ap_wp with 'weak' type is correct for nolay graph", {
                            .Names = c("ap", "ap_1", "wp")))
 })
 
+
+test_that("ap_wp with 'strong' type is correct for sn94 graph", {
+  expect_equal(ap_wp(sn94, type = "strong"),
+               structure(list(ap = c("b", "c"),
+                              ap_1 = c("b", "c"),
+                              wp = "d"),
+                         .Names = c("ap", "ap_1", "wp")))
+})

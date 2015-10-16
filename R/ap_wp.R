@@ -36,16 +36,20 @@ ap_wp <- function(g, type = "weak") {
 
   if (!igraph::is_connected(g, mode = type)) stop("g must be connected")
 
+  if (is.null(V(g)$name)) V(g)$name <- as.character(V(g))
+
   # initialization
-  ap <- igraph::articulation_points(g)$name
+  ap <- NULL
   ap_1 <- NULL
   wp <- NULL
   ## For each AP
-  for (vname in ap) {
+  for (vname in V(g)$name) {
     v <- V(g)[vname]
     .tmpg <- igraph::delete_vertices(g, v)
     ## Compute CC without this AP
     .tmpc <- igraph::components(.tmpg, mode = type)
+    ## If more than one component -> AP
+    if (.tmpc$no > 1) ap <- append(ap, vname)
     ## If one of the CC is a singleton
     if (1 %in% .tmpc$csize) {
       ## v is ap_1
@@ -56,5 +60,7 @@ ap_wp <- function(g, type = "weak") {
       wp <- append(wp, V(.tmpg)[.tmpc_sing]$name)
     }
   }
-  list(ap = ap, ap_1 = ap_1, wp = wp)
+  list(ap = unique(ap),
+       ap_1 = unique(ap_1),
+       wp = unique(wp))
 }

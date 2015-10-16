@@ -33,6 +33,6 @@ A weak point is a singleton component of a graph when one of its 1-order articul
 removed.
 }
 \references{
-Monique Dalut-Vincent, Michel Forsé, Jean-Paul Auray, "An algorithm for finding the structure of social groups", \emph{Social Networks}, 16 (1994) 137-162.
+Monique Dalud-Vincent, Michel Forsé, Jean-Paul Auray, "An algorithm for finding the structure of social groups", \emph{Social Networks}, 16 (1994) 137-162.
 }
 

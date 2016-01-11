@@ -20,5 +20,6 @@ g <- igraph::sample_gnp(14, 0.35)
 plot(g)
 res <- reso(g)
 plot_reso(g, res)
+
 }
 

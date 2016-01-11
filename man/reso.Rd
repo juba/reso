@@ -30,6 +30,7 @@ g <- igraph::sample_gnp(14, 0.35)
 plot(g)
 res <- reso(g)
 plot_reso(g, res)
+
 }
 \references{
 Monique Dalud-Vincent, Michel Forsé, Jean-Paul Auray, "An algorithm for finding the structure of social groups", \emph{Social Networks}, 16 (1994) 137-162.

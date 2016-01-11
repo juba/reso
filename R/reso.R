@@ -114,9 +114,13 @@ reso_decompose <- function(g, iter, ap1, ap, type) {
     }
 
     ## Add group to groups list
+    index <- 2
+    while (.group_name %in% names(groups)) {
+      .group_name <- paste0(.group_name, letters[index])
+    }
     groups[[.group_name]] <- .group
 
-    ## Apply the algortihm to the graph without the previously clustered vertices
+    ## Apply the algorithm to the graph without the previously clustered vertices
     subcc <- cc - .group
     if (length(V(subcc)) > 0) groups <- c(groups, reso_decompose(subcc, iter, ap1, ap, type))
 

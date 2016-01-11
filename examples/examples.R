@@ -32,5 +32,12 @@ plot_reso(g3, res)
 res <- reso(g3, type="strong")
 plot_reso(g3, res)
 
+## Directed graph, strong connexity
+g3 <- read_graph(file="examples/graphs/directed_strong.txt", format="edgelist", directed=TRUE)
+V(g3)$name <- as.character(c(13,7,1,11,12,9))
+plot(g3)
+res <- reso(g3, type="strong")
+plot_reso(g3, res)
+
 
 

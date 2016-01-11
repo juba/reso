@@ -86,7 +86,7 @@ reso_decompose <- function(g, iter, ap1, ap, type) {
   ## for each CC not singleton
   for (cc in ccs) {
     ## Compute AP, 1-AP and WP
-    points <- ap_wp(cc)
+    points <- ap_wp(cc, type=type)
     ## Add AP and 1-AP to list of not clustered previous AP and 1-AP
     ap1 <- unique(c(ap1, points$ap_1))
     ap <- unique(c(ap, points$ap))

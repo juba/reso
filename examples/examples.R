@@ -16,6 +16,13 @@ res <- reso(g)
 res
 plot_reso(g, res)
 
+## Random graph, directed, strong connectivity
+g <- sample_gnp(14, 0.15, directed = TRUE)
+plot(g)
+res <- reso(g, type="strong")
+res
+plot_reso(g, res)
+
 ## Nolay graph
 g2 <- read_graph(file="examples/graphs/nolay_comp1.txt", format="edgelist", directed=FALSE)
 V(g2)$name <- as.character(c(30,31,77,32,110,34,90,70,103,109))

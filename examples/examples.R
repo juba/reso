@@ -17,9 +17,9 @@ res
 plot_reso(g, res)
 
 ## Export Reso 0.51
-#write.table(as.matrix(as_adjacency_matrix(g)),
-#            file="out.txt", col.names=FALSE, row.names=FALSE,
-#            sep = " ")
+write.table(as.matrix(as_adjacency_matrix(g)),
+            file="out.txt", col.names=FALSE, row.names=FALSE,
+            sep = " ")
 
 
 ## Random graph, directed, strong connectivity

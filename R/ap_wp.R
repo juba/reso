@@ -51,7 +51,7 @@ ap_wp <- function(g, type = "weak") {
     ## If more than one component -> AP
     if (.tmpc$no > 1) ap <- append(ap, vname)
     ## If one of the CC is a singleton
-    if (1 %in% .tmpc$csize) {
+    if ((.tmpc$no > 1) && (1 %in% .tmpc$csize)) {
       ## v is ap_1
       ap_1 <- append(ap_1, vname)
       ## singletons are wp

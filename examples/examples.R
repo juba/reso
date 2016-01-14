@@ -16,6 +16,12 @@ res <- reso(g)
 res
 plot_reso(g, res)
 
+## Export Reso 0.51
+#write.table(as.matrix(as_adjacency_matrix(g)),
+#            file="out.txt", col.names=FALSE, row.names=FALSE,
+#            sep = " ")
+
+
 ## Random graph, directed, strong connectivity
 g <- sample_gnp(14, 0.15, directed = TRUE)
 plot(g)

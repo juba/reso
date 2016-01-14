@@ -36,6 +36,7 @@ reso <- function(g, type = "weak") {
 
   ## Run algorithm
   groups <- reso_decompose(g, 0, NULL, NULL, type)
+  names(groups) <- paste(names(groups), seq_along(names(groups)), sep = "_")
 
   ## Generate group variable
   group <- rep(NA, length(V(g)))
@@ -61,6 +62,7 @@ reso <- function(g, type = "weak") {
 reso_decompose <- function(g, iter, ap1, ap, type) {
 
   groups <- list()
+  .group_name <- ""
   ## Iteration, for group naming
   iter <- iter + 1
 
@@ -70,7 +72,9 @@ reso_decompose <- function(g, iter, ap1, ap, type) {
   cc_sing_id <- which(comp$csize == 1)
   if (length(cc_sing_id) > 0) {
     cc_sing <- which(comp$membership %in% cc_sing_id)
-    groups[[paste0("CCsing_", iter)]] <- V(g)[cc_sing]$name
+    .group_name <- paste0(iter, "_CCsing")
+    .group <- V(g)[cc_sing]$name
+    groups[[.group_name]] <- .group
   }
 
   ## Compute all CCs not singleton
@@ -82,9 +86,9 @@ reso_decompose <- function(g, iter, ap1, ap, type) {
     ccs[[length(ccs) + 1]] <- cc
   }
 
-  .group_name <- ""
   ## for each CC not singleton
   for (cc in ccs) {
+    group <- list()
     ## Compute AP, 1-AP and WP
     points <- ap_wp(cc, type = type)
     ## Add AP and 1-AP to list of not clustered previous AP and 1-AP
@@ -93,32 +97,32 @@ reso_decompose <- function(g, iter, ap1, ap, type) {
     ## If there are WP, create a group with them
     if (length(points$wp) > 0) {
       .group <- points$wp
-      .group_name <- paste0("WP_", iter)
+      .group_name <- paste0(iter, "_WP")
+      group[[.group_name]] <- .group
     }
     ## Else if there are not clustered 1-AP, create a group with them
     else if (sum(cc_ap1 <- V(cc)$name %in% ap1) > 0) {
       .group <- V(cc)[cc_ap1]$name
-      .group_name <- paste0("1-AP_", iter)
+      .group_name <- paste0(iter,"_1-AP")
+      group[[.group_name]] <- .group
       ap1 <- setdiff(ap1, .group)
     }
     ## Else if there are not clustered AP, create a group with them
     else if (sum(cc_ap <- V(cc)$name %in% ap) > 0) {
       .group <- V(cc)[cc_ap]$name
-      .group_name <- paste0("AP_", iter)
+      .group_name <- paste0(iter, "_AP")
+      group[[.group_name]] <- .group
       ap <- setdiff(ap, .group)
     }
     ## Else, create a group with the whole CC
     else {
       .group <- V(cc)$name
-      .group_name <- paste0("CC_", iter)
+      .group_name <- paste0(iter, "_CC")
+      group[[.group_name]] <- .group
     }
 
     ## Add group to groups list
-    index <- 2
-    while (.group_name %in% names(groups)) {
-      .group_name <- paste0(.group_name, letters[index])
-    }
-    groups[[.group_name]] <- .group
+    groups <- c(groups, group)
 
     ## Apply the algorithm to the graph without the previously clustered vertices
     subcc <- cc - .group
